@@ -416,7 +416,16 @@ class NMatrix
 
 
   def to_s #:nodoc:
-    self.to_flat_array.to_s
+    #self.to_flat_array.to_s
+    #ary = Array.new(self.rows)
+    r = 0
+    l = []
+    self.each do |v|
+      l << [] if r % self.rows == 0
+      l[-1] << v
+      r += 1
+    end
+    return l
   end
 
   #
