@@ -419,12 +419,21 @@ class NMatrix
     #self.to_flat_array.to_s
     #ary = Array.new(self.rows)
     r = 0
-    l = []
+    l = "[\n"
+    if self.dim.eql? 1
+      return self.to_flat_array.to_s
+    end
     self.each do |v|
-      l << [] if r % self.rows == 0
-      l[-1] << v
+      l << "  [" if r % self.cols == 0
+      l += "#{v}"
+      unless r % self.cols == self.cols - 1
+        l += ", "
+      else
+        l += "],\n"
+      end
       r += 1
     end
+    l += "]"
     return l
   end
 
